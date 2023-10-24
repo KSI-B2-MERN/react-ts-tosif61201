@@ -1,24 +1,22 @@
+import axios from "axios";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Navbar from "./components/navbar";
 
-function App() {
+function SignUp() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const onUsernameChange = (username: string) => {
-    console.log(username);
+    setUsername(username);
   };
-  const onPasswordChange = (password: String) => {
-    console.log(password);
+  const onPasswordChange = (password: string) => {
+    setPassword(password);
   };
 
   return (
     <>
-      <Navbar />
-      <div className=" bg-slate-300 w-screen h-screen flex justify-center items-center flex-col ">
-        <h2 className="text-lg font-bold text-black-700">Login Form</h2>
-        <p>Provide Your Valid Login Credentials</p>
-        <div className="flex w-full justify-around"></div>
+      <div className=" bg-slate-600 w-screen h-screen flex justify-center items-center ">
         <div className="w-1/5 h-auto flex flex-col justify-center  bg-slate-400 p-3 pt-10 pb-10 rounded-md ">
+          <h2 className="text-lg font-bold text-blue-700">Sign-Up Form</h2>
           <div className="  h-14 w-1/2 p-2 flex flex-col ml-16 mt-3 ">
             <img
               src="https://knowledge.tech/assets/i/KnowledgeImages/logo.png"
@@ -35,7 +33,7 @@ function App() {
               placeholder="Your Name"
               required
               onChange={(e) => {
-                onUsernameChange(e.target.value);
+                void onUsernameChange(e.target.value);
               }}
             />
             <label className="text-black-500">Password</label>
@@ -44,7 +42,7 @@ function App() {
               type="password"
               required
               onChange={(e) => {
-                onPasswordChange(e.target.value);
+                void onPasswordChange(e.target.value);
               }}
             />
             <h2 className=" font-normal text-blue-700 cursor-pointer">
@@ -53,7 +51,7 @@ function App() {
           </div>
 
           <div className="flex w-full  flex-col items-center my-2 ">
-            <button className="font-bold text-blue-700 ">Log In</button>
+            <button className="font-bold text-blue-700 ">Sign-Up</button>
           </div>
         </div>
       </div>
@@ -61,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default SignUp;
