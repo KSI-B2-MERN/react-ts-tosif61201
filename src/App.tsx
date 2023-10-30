@@ -2,19 +2,61 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Navbar from "./components/navbar";
+import SignUp from "./pages/sign-up";
+import axios from "axios";
+
+import Select from "react-select";
+
+const roleOptions = [
+  { value: "1", label: "student" },
+  { value: "2", label: "teacher" },
+];
 
 function App() {
-  const onUsernameChange = (username: string) => {
-    console.log(username);
+  const [fName, setFName] = useState<string>("");
+  const [lName, setLName] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState<string>("");
+
+  const [signup, setSignup] = useState<boolean>(false);
+
+  const onFNameChange = (fName: string) => {
+    setFName(fName);
   };
-  const onPasswordChange = (password: String) => {
-    console.log(password);
+  const onLNameChange = (lName: string) => {
+    setLName(lName);
+  };
+
+  const onUsernameChange = (username: string) => {
+    setUsername(username);
+  };
+  const onPasswordChange = (password: string) => {
+    setPassword(password);
+  };
+
+  const onRoleChange = (role: string) => {
+    setRole(role);
+  };
+
+  const login = async () => {
+    const loginRes = await axios.post("http://localhost:3000/auth/signup", {
+      username: username,
+      password: password,
+    });
+
+    if (loginRes.data) {
+      alert("Logged in Successfuly");
+    } else {
+      alert("Incorrect Username/Password");
+    }
   };
 
   return (
     <>
-      <Navbar />
-      <div className=" bg-slate-300 w-screen h-screen flex justify-center items-center flex-col ">
+      {/* <Navbar /> */}
+      <SignUp />
+      {/* <div className=" bg-slate-300 w-screen h-screen flex justify-center items-center flex-col ">
         <h2 className="text-lg font-bold text-black-700">Login Form</h2>
         <p>Provide Your Valid Login Credentials</p>
         <div className="flex w-full justify-around"></div>
@@ -48,15 +90,33 @@ function App() {
               }}
             />
             <h2 className=" font-normal text-blue-700 cursor-pointer">
-              Forget Password*
+              <p className="text-gray-500 ">
+                Not register yet?{" "}
+                <span
+                  className="text-blue-700 cursor-pointer"
+                  onClick={() => {
+                    setSignup(true);
+                  }}
+                >
+                  {" "}
+                  SignUp
+                </span>
+              </p>
             </h2>
           </div>
 
           <div className="flex w-full  flex-col items-center my-2 ">
-            <button className="font-bold text-blue-700 ">Log In</button>
+            <button
+              className="font-bold text-blue-700 "
+              onClick={() => {
+                void login();
+              }}
+            >
+              Log In
+            </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
